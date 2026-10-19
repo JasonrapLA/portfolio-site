@@ -1,0 +1,12 @@
+{%- comment -%}
+  Renders an image, or a tinted placeholder when no image is set.
+  Params: src, alt, color, label, ratio (CSS class suffix: wide | photo | portrait)
+{%- endcomment -%}
+{%- assign ratio = include.ratio | default: 'wide' -%}
+{%- if include.src and include.src != '' -%}
+  {%- assign first = include.src | slice: 0, 4 -%}
+  {%- if first == 'http' -%}{%- assign url = include.src -%}{%- else -%}{%- assign url = include.src | relative_url -%}{%- endif -%}
+  <div class="media media-{{ ratio }}"><img src="{{ url }}" alt="{{ include.alt | escape }}" loading="lazy"></div>
+{%- else -%}
+  <div class="media media-{{ ratio }} media-empty"{% if include.color %} style="background: {{ include.color }}"{% endif %} role="img" aria-label="{{ include.alt | escape }}"><span class="mono">{{ include.label | default: 'Image coming soon' }}</span></div>
+{%- endif -%}

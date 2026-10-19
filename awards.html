@@ -1,0 +1,50 @@
+---
+layout: default
+title: Awards & Recognition
+permalink: /awards/
+---
+{% assign a = site.data.awards %}
+{% assign total = 0 %}
+{% for g in a.groups %}{% assign total = total | plus: g.items.size %}{% endfor %}
+
+<section class="wrap case-hero">
+  <p class="eyebrow mono">Awards &amp; Recognition</p>
+  <h1 class="case-title">{{ total }} awards.<br><span class="muted">{{ a.tagline }}</span></h1>
+</section>
+
+<section class="stats rule-y" aria-label="Headline honors">
+  <div class="wrap stats-grid">
+    {% for st in a.headline %}
+    <div class="stat"><span class="stat-value{% if forloop.first %} accent{% endif %}">{{ st.value }}</span><span class="stat-label">{{ st.label }}</span></div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="wrap chips-wrap">
+  <div class="chips" role="group" aria-label="Filter by show">
+    <button type="button" class="chip" aria-pressed="true" data-filter="all">All</button>
+    {% for g in a.groups %}
+    <button type="button" class="chip" aria-pressed="false" data-filter="{{ g.show | slugify }}">{{ g.show }}</button>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="wrap award-groups">
+  {% for g in a.groups %}
+  <div class="award-group" data-group="{{ g.show | slugify }}">
+    <div class="award-group-head">
+      <h2>{{ g.show }}</h2>
+      <span class="mono small muted">{{ g.items.size }} {% if g.items.size == 1 %}award{% else %}awards{% endif %}{% if g.extra %} {{ g.extra }}{% endif %}</span>
+    </div>
+    <div class="award-list">
+      {% for it in g.items %}
+      <div class="award-row">
+        <span class="strong">{{ it.level }}</span>
+        <span class="muted">{{ it.category | default: '—' }}</span>
+        <span class="muted award-project">{{ it.project }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</section>

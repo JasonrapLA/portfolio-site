@@ -1,0 +1,89 @@
+---
+layout: default
+---
+{% assign s = site.data.site %}
+{% assign projects = site.projects | sort: 'order' %}
+{% assign featured = projects | where: 'featured', true %}
+{% assign more = projects | where_exp: 'p', 'p.featured != true' %}
+
+<section id="top" class="hero wrap">
+  <p class="eyebrow mono">{{ s.role }} — {{ s.location }}</p>
+  <h1 class="hero-title">{{ s.headline }} <span class="accent">{{ s.headline_accent }}</span></h1>
+  <div class="hero-foot">
+    <p class="lede">{{ s.intro }}</p>
+    <a class="btn btn-solid" href="#work">See the work
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5"/></svg></a>
+  </div>
+</section>
+
+<section class="stats rule-y" aria-label="Highlights">
+  <div class="wrap stats-grid">
+    {% for st in s.stats %}
+    <div class="stat"><span class="stat-value">{{ st.value }}</span><span class="stat-label">{{ st.label }}</span></div>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="work" class="wrap section">
+  <div class="section-head">
+    <h2 class="h2">Selected work</h2>
+    <span class="mono muted small">{{ featured.size | prepend: '0' | slice: -2, 2 }} projects</span>
+  </div>
+  <div class="tiles">
+    {% for p in featured %}
+    <a class="tile" href="{{ p.url | relative_url }}">
+      {% include media.html src=p.hero alt=p.title color=p.hero_color label=p.title %}
+      <div class="tile-meta mono small"><span class="muted upper">{{ p.client }}</span>{% if p.award_line != blank %}<span class="accent">{{ p.award_line }}</span>{% endif %}</div>
+      <h3 class="tile-title">{{ p.title }}</h3>
+      {% if p.summary != blank %}<p class="tile-text muted">{{ p.summary }}</p>{% endif %}
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% if more.size > 0 %}
+<section class="wrap section-tight" aria-label="More work">
+  <h2 class="label mono muted">More work</h2>
+  <div class="rows">
+    {% for p in more %}
+      {% if p.summary != blank %}
+      <a class="row" href="{{ p.url | relative_url }}"><span class="muted">{{ p.client }}</span><span class="row-title">{{ p.title }}</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
+      {% elsif p.video != blank %}
+      <a class="row" href="{{ p.video }}" target="_blank" rel="noopener"><span class="muted">{{ p.client }}</span><span class="row-title">{{ p.title }}</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
+      {% else %}
+      <div class="row"><span class="muted">{{ p.client }}</span><span class="row-title">{{ p.title }}</span><span></span></div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section id="about" class="panel">
+  <div class="wrap section about">
+    <div class="about-side">
+      <h2 class="h2">About</h2>
+      {% include media.html src=s.portrait alt=s.name ratio='portrait' label='Portrait' %}
+    </div>
+    <div class="about-body">
+      {% for para in s.about %}
+      <p{% unless forloop.first %} class="muted"{% endunless %}>{{ para }}</p>
+      {% endfor %}
+      <div class="career">
+        {% for job in s.career %}
+        <div class="career-row"><span class="strong">{{ job.place }}</span><span class="muted">{{ job.role }}</span></div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="awards" class="wrap section">
+  <h2 class="h2 mb">Recognition</h2>
+  <div class="award-cards">
+    {% for aw in s.awards_summary %}
+    <div class="award-card"><span class="award-card-title">{{ aw.show }}</span><span class="muted">{{ aw.detail }}</span></div>
+    {% endfor %}
+  </div>
+  <a class="btn btn-outline mt" href="{{ '/awards/' | relative_url }}">See every award
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8h10M8.5 3.5 13 8l-4.5 4.5"/></svg></a>
+</section>

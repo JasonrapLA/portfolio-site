@@ -1,0 +1,153 @@
+# Pages CMS configuration — https://pagescms.org
+# Sign in at app.pagescms.org with GitHub and open this repo to edit the site with forms.
+
+media:
+  input: images
+  output: /images
+
+content:
+  - name: projects
+    label: Projects
+    type: collection
+    path: _projects
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      fields: [title, client, featured, order]
+      primary: title
+      sort: [order, title]
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: client, label: Client, type: string, required: true }
+      - { name: agency, label: Agency, type: string }
+      - { name: year, label: Year, type: string }
+      - name: featured
+        label: Featured on homepage
+        type: boolean
+        description: "On = big tile in Selected work. Off = a line in More work."
+      - name: order
+        label: Order
+        type: number
+        description: "Lower numbers show first."
+      - { name: award_line, label: Award line, type: string, description: "Short line shown on the tile, e.g. “2× Cannes Grand Prix”." }
+      - name: summary
+        label: Summary
+        type: text
+        description: "One or two sentences. Projects without a summary show as a plain, unlinked line in More work."
+      - { name: hero, label: Hero image, type: image }
+      - { name: hero_color, label: Placeholder color, type: string, description: "Hex color shown when there is no hero image, e.g. #1E3A5F." }
+      - { name: video, label: Film link, type: string, description: "YouTube or Vimeo link. Embedded at the top of the project page." }
+      - { name: role, label: Your role, type: string }
+      - { name: partner, label: Creative partner, type: string }
+      - { name: disciplines, label: Disciplines, type: string }
+      - { name: problem, label: The problem, type: text }
+      - { name: idea, label: The idea, type: text }
+      - { name: result, label: The result, type: text }
+      - name: stats
+        label: Big numbers
+        type: object
+        list: true
+        fields:
+          - { name: value, label: Number, type: string }
+          - { name: label, label: Label, type: string }
+      - name: gallery
+        label: Gallery images
+        type: image
+        list: true
+      - name: press
+        label: Press links
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: url, label: Link, type: string }
+      - { name: body, label: Extra text (optional), type: rich-text }
+
+  - name: site
+    label: Site text
+    type: file
+    path: _data/site.yml
+    format: yaml
+    fields:
+      - { name: name, label: Name, type: string }
+      - { name: role, label: Title, type: string }
+      - { name: location, label: Location, type: string }
+      - { name: headline, label: Headline, type: text }
+      - { name: headline_accent, label: Headline last word (in accent color), type: string }
+      - { name: intro, label: Intro, type: text }
+      - name: stats
+        label: Highlight numbers
+        type: object
+        list: true
+        fields:
+          - { name: value, label: Number, type: string }
+          - { name: label, label: Label, type: string }
+      - { name: portrait, label: Portrait, type: image }
+      - name: about
+        label: About paragraphs
+        type: text
+        list: true
+      - name: career
+        label: Career
+        type: object
+        list: true
+        fields:
+          - { name: place, label: Agency, type: string }
+          - { name: role, label: Role / clients, type: string }
+      - name: awards_summary
+        label: Homepage award summary
+        type: object
+        list: true
+        fields:
+          - { name: show, label: Show, type: string }
+          - { name: detail, label: Detail, type: text }
+      - { name: contact_headline, label: Contact headline, type: text }
+      - { name: email, label: Email, type: string }
+      - { name: linkedin, label: LinkedIn URL, type: string }
+      - { name: resume, label: Résumé file, type: file }
+
+  - name: chat
+    label: Chat assistant
+    type: file
+    path: _data/chat.yml
+    format: yaml
+    fields:
+      - { name: enabled, label: Show chat button, type: boolean }
+      - { name: greeting, label: First message, type: text }
+      - name: suggestions
+        label: Suggested questions
+        type: string
+        list: true
+      - { name: system_prompt, label: Instructions for the assistant, type: text, description: "What the chat knows about you and how it should talk." }
+      - { name: endpoint, label: Worker URL, type: string, description: "Leave as is unless you move the Cloudflare Worker." }
+      - { name: model, label: Model, type: string, description: "Leave as is unless you change the Worker." }
+
+  - name: awards
+    label: Awards
+    type: file
+    path: _data/awards.yml
+    format: yaml
+    fields:
+      - { name: tagline, label: Tagline under the total, type: string }
+      - name: headline
+        label: Headline honors
+        type: object
+        list: true
+        fields:
+          - { name: value, label: Number, type: string }
+          - { name: label, label: Label, type: string }
+      - name: groups
+        label: Shows
+        type: object
+        list: true
+        fields:
+          - { name: show, label: Show, type: string }
+          - { name: extra, label: Extra note (e.g. “+ 18 shortlists”), type: string }
+          - name: items
+            label: Awards
+            type: object
+            list: true
+            fields:
+              - { name: level, label: Level, type: string, description: "Gold, Silver, Grand Prix, White Pencil…" }
+              - { name: category, label: Category, type: string }
+              - { name: project, label: Project, type: string }

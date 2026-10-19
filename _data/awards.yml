@@ -1,0 +1,113 @@
+tagline: "And counting."
+
+headline:
+  - value: "2"
+    label: "Cannes Grand Prix"
+  - value: "1"
+    label: "Titanium Lion"
+  - value: "1"
+    label: "D&AD White Pencil"
+  - value: "1"
+    label: "Grand Clio"
+  - value: "#4"
+    label: "GCD worldwide, One Show 2022 (#6 in 2023)"
+
+# Each award: level, category (optional), project (optional — add it to show which work won).
+groups:
+  - show: "Cannes Lions"
+    extra: "+ 18 shortlists"
+    items:
+      - { level: "Grand Prix", category: "Integrated", project: "Boost Your Voice" }
+      - { level: "Grand Prix", category: "Promo & Activation", project: "Boost Your Voice" }
+      - { level: "Titanium", category: "Titanium", project: "Boost Your Voice" }
+      - { level: "Gold", category: "Entertainment" }
+      - { level: "Gold", category: "Outdoor" }
+      - { level: "Gold", category: "Digital Craft" }
+      - { level: "Gold", category: "Health & Wellness" }
+      - { level: "Silver", category: "Digital Craft" }
+      - { level: "Silver", category: "Direct" }
+      - { level: "Silver", category: "Promo" }
+      - { level: "Bronze", category: "Entertainment" }
+      - { level: "Bronze", category: "Creative Strategy" }
+  - show: "The One Show"
+    items:
+      - { level: "Gold", category: "Experiential" }
+      - { level: "Gold", category: "Innovation — Film" }
+      - { level: "Gold", category: "Innovation — Branded Entertainment" }
+      - { level: "Gold", category: "Innovation — Moving Image Craft" }
+      - { level: "Gold", category: "Innovation — Interactive & Mobile" }
+      - { level: "Gold", category: "Interactive — Visual Craft" }
+      - { level: "Gold", category: "Product" }
+      - { level: "Gold", category: "Innovation Design" }
+      - { level: "Gold", category: "Digital Design" }
+      - { level: "Gold", category: "Moving Image Craft" }
+      - { level: "Gold", category: "Branded Entertainment" }
+      - { level: "Gold", category: "Branded Entertainment" }
+      - { level: "Gold", category: "Interactive" }
+      - { level: "Gold", category: "Interactive & Mobile Craft" }
+      - { level: "Gold", category: "Film" }
+      - { level: "Silver", category: "Moving Image Craft" }
+      - { level: "Silver", category: "Interactive & Mobile Craft" }
+      - { level: "Silver", category: "Branded Entertainment" }
+      - { level: "Silver", category: "Integrated Branding" }
+      - { level: "Silver", category: "Cultural Driver" }
+      - { level: "Silver", category: "Integrated — Use of Technology" }
+      - { level: "Silver", category: "Creative Use of Data" }
+      - { level: "Silver", category: "Technology" }
+      - { level: "Bronze", category: "Film" }
+      - { level: "Bronze", category: "Outdoor Innovation" }
+      - { level: "Bronze", category: "Branded Entertainment" }
+      - { level: "Bronze", category: "Interactive & Mobile Craft" }
+      - { level: "Bronze", category: "Craft" }
+  - show: "D&AD"
+    items:
+      - { level: "White Pencil", project: "Boost Your Voice" }
+      - { level: "Wood Pencil", project: "Boost Your Voice" }
+      - { level: "Wood Pencil" }
+      - { level: "Graphite Pencil" }
+  - show: "Clio"
+    items:
+      - { level: "Grand Clio" }
+      - { level: "Gold" }
+      - { level: "Gold", category: "Film" }
+      - { level: "Gold", category: "Creative Use of Data" }
+      - { level: "Gold", category: "Digital / Mobile" }
+      - { level: "Gold", category: "Clio Health — Use of Data" }
+      - { level: "Silver", category: "Clio Health — Design" }
+      - { level: "Silver", category: "Clio Health — Digital UX" }
+      - { level: "Bronze", category: "Clio Health — Innovation" }
+      - { level: "Bronze", category: "Clio Health — Digital / Mobile" }
+      - { level: "Bronze", category: "Innovation" }
+      - { level: "Bronze", category: "Branded Content" }
+  - show: "Effie"
+    items:
+      - { level: "Gold" }
+      - { level: "Silver" }
+      - { level: "Bronze", category: "For Social Good" }
+      - { level: "Bronze" }
+  - show: "ADC"
+    items:
+      - { level: "Gold", category: "Design for Good" }
+      - { level: "Silver", category: "Online Film" }
+      - { level: "Bronze", category: "Design for Good" }
+      - { level: "Bronze", category: "Product Design" }
+  - show: "Ciclope"
+    items:
+      - { level: "Gold" }
+      - { level: "Gold" }
+      - { level: "Silver" }
+      - { level: "Silver" }
+      - { level: "Silver" }
+      - { level: "Silver" }
+      - { level: "Silver" }
+      - { level: "Bronze" }
+  - show: "LIA"
+    items:
+      - { level: "Gold" }
+      - { level: "Gold" }
+  - show: "Press & honors"
+    items:
+      - { level: "Ad Age / Creativity", category: "Campaign of the Year", project: "Boost Your Voice" }
+      - { level: "Ad Age / Creativity", category: "Craft of the Year", project: "Drawn Closer" }
+      - { level: "Communication Arts", category: "Featured" }
+      - { level: "TBS", category: "World’s Funniest Commercials" }

@@ -1,0 +1,26 @@
+title: "Jason Rappaport — Group Creative Director / Writer"
+description: "Group Creative Director and writer in Los Angeles. Cannes Grand Prix, Titanium Lion, D&AD White Pencil, Grand Clio."
+url: "https://www.jasonrappaportfolio.com"
+baseurl: ""
+
+collections:
+  projects:
+    output: true
+    permalink: /work/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+
+plugins:
+  - jekyll-seo-tag
+
+exclude:
+  - README.md
+  - .pages.yml
+  - Gemfile
+  - Gemfile.lock
+  - vendor

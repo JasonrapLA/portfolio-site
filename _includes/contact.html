@@ -1,0 +1,15 @@
+{% assign s = site.data.site %}
+<section id="contact" class="contact">
+  <div class="wrap contact-inner">
+    <h2 class="contact-title">{{ s.contact_headline }}</h2>
+    <div class="btn-row">
+      {% if s.email != blank %}<a class="btn btn-invert" href="mailto:{{ s.email }}">{{ s.email }}</a>{% endif %}
+      {% if s.linkedin != blank %}<a class="btn btn-ghost-invert" href="{{ s.linkedin }}">LinkedIn</a>{% endif %}
+      {% if s.resume != blank %}<a class="btn btn-ghost-invert" href="{{ s.resume | relative_url }}">Résumé (PDF)</a>{% endif %}
+    </div>
+    <div class="footer mono">
+      <span>© {{ 'now' | date: '%Y' }} {{ s.name }}</span>
+      <span>{{ s.location }}</span>
+    </div>
+  </div>
+</section>

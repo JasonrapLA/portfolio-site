@@ -1,0 +1,91 @@
+---
+layout: default
+---
+{% assign p = page %}
+{% assign featured = site.projects | sort: 'order' | where: 'featured', true %}
+{% assign next = nil %}
+{% for f in featured %}
+  {% if f.url == p.url %}
+    {% assign ni = forloop.index0 | plus: 1 %}
+    {% if ni >= featured.size %}{% assign ni = 0 %}{% endif %}
+    {% assign next = featured[ni] %}
+  {% endif %}
+{% endfor %}
+{% unless next %}{% assign next = featured.first %}{% endunless %}
+
+{% comment %} Turn a YouTube or Vimeo link into an embed URL {% endcomment %}
+{% assign embed = '' %}
+{% if p.video != blank %}
+  {% if p.video contains 'vimeo.com/' %}
+    {% assign vid = p.video | split: '?' | first | split: '/' | last %}
+    {% assign embed = 'https://player.vimeo.com/video/' | append: vid %}
+  {% elsif p.video contains 'youtu.be/' %}
+    {% assign vid = p.video | split: 'youtu.be/' | last | split: '?' | first %}
+    {% assign embed = 'https://www.youtube-nocookie.com/embed/' | append: vid %}
+  {% elsif p.video contains 'v=' %}
+    {% assign vid = p.video | split: 'v=' | last | split: '&' | first %}
+    {% assign embed = 'https://www.youtube-nocookie.com/embed/' | append: vid %}
+  {% endif %}
+{% endif %}
+
+<div class="wrap back-row">
+  <a class="mono upper small back" href="{{ '/#work' | relative_url }}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13 8H3M7.5 3.5 3 8l4.5 4.5"/></svg>All work</a>
+</div>
+
+<section class="wrap case-hero">
+  <p class="eyebrow mono">{{ p.client }}{% if p.agency != blank %} · {{ p.agency }}{% endif %}{% if p.year != blank %} · {{ p.year }}{% endif %}</p>
+  <h1 class="case-title">{{ p.title }}</h1>
+  {% if p.summary != blank %}<p class="case-lede muted">{{ p.summary }}</p>{% endif %}
+</section>
+
+<section class="wrap">
+  {% if embed != '' %}
+  <div class="media media-video"><iframe src="{{ embed }}" title="{{ p.title | escape }} film" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+  {% else %}
+  {% include media.html src=p.hero alt=p.title color=p.hero_color label=p.title ratio='video' %}
+  {% endif %}
+</section>
+
+{% if p.stats and p.stats.size > 0 %}
+<section class="wrap case-stats">
+  {% for st in p.stats %}
+  <div class="stat"><span class="stat-value big{% if forloop.first %} accent{% endif %}">{{ st.value }}</span><span class="stat-label">{{ st.label }}</span></div>
+  {% endfor %}
+</section>
+{% endif %}
+
+<section class="wrap section case-body">
+  <div class="case-facts">
+    {% if p.role != blank %}<div class="fact"><span class="mono upper small muted">Role</span><span>{{ p.role }}</span></div>{% endif %}
+    {% if p.partner != blank %}<div class="fact"><span class="mono upper small muted">Partner</span><span>{{ p.partner }}</span></div>{% endif %}
+    {% if p.disciplines != blank %}<div class="fact"><span class="mono upper small muted">Disciplines</span><span>{{ p.disciplines }}</span></div>{% endif %}
+  </div>
+  <div class="case-story">
+    {% if p.problem != blank %}<div class="story-block"><h2>The problem</h2><p class="muted">{{ p.problem }}</p></div>{% endif %}
+    {% if p.idea != blank %}<div class="story-block"><h2>The idea</h2><p class="muted">{{ p.idea }}</p></div>{% endif %}
+    {% if p.result != blank %}<div class="story-block"><h2>The result</h2><p class="muted">{{ p.result }}</p></div>{% endif %}
+    {% if content != '' %}<div class="story-block prose">{{ content }}</div>{% endif %}
+    {% if p.press and p.press.size > 0 %}
+    <div class="story-block"><h2>Press &amp; honors</h2>
+      <ul class="press">{% for pr in p.press %}<li>{% if pr.url != blank %}<a href="{{ pr.url }}" target="_blank" rel="noopener">{{ pr.name }}</a>{% else %}{{ pr.name }}{% endif %}</li>{% endfor %}</ul>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% if p.gallery and p.gallery.size > 0 %}
+<section class="wrap gallery">
+  {% for img in p.gallery %}
+    {% include media.html src=img alt=p.title ratio='photo' %}
+  {% endfor %}
+</section>
+{% endif %}
+
+{% if next and next.url != p.url %}
+<a class="next" href="{{ next.url | relative_url }}">
+  <div class="wrap next-inner">
+    <div class="next-text"><span class="mono upper small muted">Next project</span><span class="next-title">{{ next.client }} — {{ next.title }}</span></div>
+    <svg width="40" height="40" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M3 8h10M8.5 3.5 13 8l-4.5 4.5"/></svg>
+  </div>
+</a>
+{% endif %}
