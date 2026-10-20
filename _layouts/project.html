@@ -13,20 +13,6 @@ layout: default
 {% endfor %}
 {% unless next %}{% assign next = featured.first %}{% endunless %}
 
-{% comment %} Turn a YouTube or Vimeo link into an embed URL {% endcomment %}
-{% assign embed = '' %}
-{% if p.video and p.video != "" %}
-  {% if p.video contains 'vimeo.com/' %}
-    {% assign vid = p.video | split: '?' | first | split: '/' | last %}
-    {% assign embed = 'https://player.vimeo.com/video/' | append: vid %}
-  {% elsif p.video contains 'youtu.be/' %}
-    {% assign vid = p.video | split: 'youtu.be/' | last | split: '?' | first %}
-    {% assign embed = 'https://www.youtube-nocookie.com/embed/' | append: vid %}
-  {% elsif p.video contains 'v=' %}
-    {% assign vid = p.video | split: 'v=' | last | split: '&' | first %}
-    {% assign embed = 'https://www.youtube-nocookie.com/embed/' | append: vid %}
-  {% endif %}
-{% endif %}
 
 <div class="wrap back-row">
   {%- if site.data.site.coming_soon -%}{%- assign home = '/preview/' -%}{%- else -%}{%- assign home = '/' -%}{%- endif %}
@@ -39,9 +25,14 @@ layout: default
   {% if p.summary and p.summary != "" %}<p class="case-lede muted">{{ p.summary }}</p>{% endif %}
 </section>
 
-<section class="wrap">
-  {% if embed != '' %}
-  <div class="media media-video"><iframe src="{{ embed }}" title="{{ p.title | escape }} film" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+<section class="wrap films">
+  {% if p.videos and p.videos.size > 0 %}
+    {% for v in p.videos %}
+      {% assign cap = '' %}{% if p.videos.size > 1 %}{% assign cap = v.title %}{% endif %}
+      {% include video.html url=v.url title=v.title caption=cap %}
+    {% endfor %}
+  {% elsif p.video and p.video != "" %}
+    {% include video.html url=p.video title=p.title %}
   {% else %}
   {% include media.html src=p.hero alt=p.title color=p.hero_color label=p.title ratio='video' %}
   {% endif %}

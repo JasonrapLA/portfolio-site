@@ -1,0 +1,24 @@
+{%- comment -%}
+  Embeds a YouTube or Vimeo link. Params: url, title, caption (optional)
+{%- endcomment -%}
+{%- assign u = include.url | strip -%}
+{%- assign embed = '' -%}
+{%- if u contains 'vimeo.com/' -%}
+  {%- assign vid = u | split: '?' | first | split: '/' | last -%}
+  {%- assign embed = 'https://player.vimeo.com/video/' | append: vid -%}
+{%- elsif u contains 'youtu.be/' -%}
+  {%- assign vid = u | split: 'youtu.be/' | last | split: '?' | first -%}
+  {%- assign embed = 'https://www.youtube-nocookie.com/embed/' | append: vid -%}
+{%- elsif u contains '/shorts/' -%}
+  {%- assign vid = u | split: '/shorts/' | last | split: '?' | first -%}
+  {%- assign embed = 'https://www.youtube-nocookie.com/embed/' | append: vid -%}
+{%- elsif u contains 'v=' -%}
+  {%- assign vid = u | split: 'v=' | last | split: '&' | first -%}
+  {%- assign embed = 'https://www.youtube-nocookie.com/embed/' | append: vid -%}
+{%- endif -%}
+{%- if embed != '' -%}
+<figure class="film">
+  <div class="media media-video"><iframe src="{{ embed }}" title="{{ include.title | escape }}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+  {%- if include.caption and include.caption != "" %}<figcaption class="mono upper small muted">{{ include.caption }}</figcaption>{% endif %}
+</figure>
+{%- endif -%}

@@ -36,7 +36,15 @@ content:
         description: "One or two sentences. Projects without a summary show as a plain, unlinked line in More work."
       - { name: hero, label: Hero image, type: image }
       - { name: hero_color, label: Placeholder color, type: string, description: "Hex color shown when there is no hero image, e.g. #1E3A5F." }
-      - { name: video, label: Film link, type: string, description: "YouTube or Vimeo link. Embedded at the top of the project page." }
+      - name: videos
+        label: Films
+        type: object
+        list: true
+        description: "YouTube or Vimeo links, shown in order at the top of the project page (e.g. Film, Trailer, Case study)."
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: url, label: Link, type: string }
+      - { name: video, label: Film link (old single field), type: string, description: "Use Films above instead. Kept for older entries." }
       - { name: role, label: Your role, type: string }
       - { name: partner, label: Creative partner, type: string }
       - { name: disciplines, label: Disciplines, type: string }
