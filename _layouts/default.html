@@ -16,15 +16,7 @@
 </head>
 <body>
 {% if holding %}
-<main class="holding wrap">
-  <p class="eyebrow mono">{{ s.name }} — {{ s.role }} — {{ s.location }}</p>
-  <h1 class="holding-title">{{ s.coming_soon_headline }}</h1>
-  <p class="lede">{{ s.coming_soon_text }}</p>
-  <div class="btn-row">
-    {% if s.email != blank %}<a class="btn btn-solid" href="mailto:{{ s.email }}">{{ s.email }}</a>{% endif %}
-    {% if s.linkedin != blank %}<a class="btn btn-outline" href="{{ s.linkedin }}">LinkedIn</a>{% endif %}
-  </div>
-</main>
+{% include holding.html %}
 {% else %}
 <header class="site-header wrap">
   <a class="brand" href="{{ home | relative_url }}">{{ s.name }}</a>

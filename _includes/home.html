@@ -30,9 +30,9 @@
     {% for p in featured %}
     <a class="tile" href="{{ p.url | relative_url }}">
       {% include media.html src=p.hero alt=p.title color=p.hero_color label=p.title %}
-      <div class="tile-meta mono small"><span class="muted upper">{{ p.client }}</span>{% if p.award_line != blank %}<span class="accent">{{ p.award_line }}</span>{% endif %}</div>
+      <div class="tile-meta mono small"><span class="muted upper">{{ p.client }}</span>{% if p.award_line and p.award_line != "" %}<span class="accent">{{ p.award_line }}</span>{% endif %}</div>
       <h3 class="tile-title">{{ p.title }}</h3>
-      {% if p.summary != blank %}<p class="tile-text muted">{{ p.summary }}</p>{% endif %}
+      {% if p.summary and p.summary != "" %}<p class="tile-text muted">{{ p.summary }}</p>{% endif %}
     </a>
     {% endfor %}
   </div>
@@ -43,9 +43,9 @@
   <h2 class="label mono muted">More work</h2>
   <div class="rows">
     {% for p in more %}
-      {% if p.summary != blank %}
+      {% if p.summary and p.summary != "" %}
       <a class="row" href="{{ p.url | relative_url }}"><span class="muted">{{ p.client }}</span><span class="row-title">{{ p.title }}</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
-      {% elsif p.video != blank %}
+      {% elsif p.video and p.video != "" %}
       <a class="row" href="{{ p.video }}" target="_blank" rel="noopener"><span class="muted">{{ p.client }}</span><span class="row-title">{{ p.title }}</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
       {% else %}
       <div class="row"><span class="muted">{{ p.client }}</span><span class="row-title">{{ p.title }}</span><span></span></div>

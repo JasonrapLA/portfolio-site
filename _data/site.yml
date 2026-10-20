@@ -1,8 +1,22 @@
 # While true, the homepage shows a short "site updating" page.
 # The full site stays viewable at /preview/ (hidden from search engines).
 coming_soon: true
-coming_soon_headline: "New site in progress."
-coming_soon_text: "I’m putting the finishing touches on a new portfolio. Back shortly. In the meantime, say hi."
+coming_soon_headline: "New portfolio"
+coming_soon_accent: "in the edit."
+coming_soon_text: "Cutting years of work down to the good stuff. Back shortly. In the meantime, say hi."
+coming_soon_ticker:
+  - "2× Cannes Grand Prix"
+  - "Titanium Lion"
+  - "D&AD White Pencil"
+  - "Grand Clio"
+  - "Emmy-nominated"
+  - "#4 GCD worldwide, One Show"
+  - "adidas"
+  - "Boost Mobile"
+  - "Cox"
+  - "Hallmark"
+  - "Postmates"
+  - "Pepsi"
 
 name: "Jason Rappaport"
 role: "Group Creative Director / Writer"

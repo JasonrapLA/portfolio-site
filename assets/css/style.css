@@ -57,9 +57,47 @@ button { font: inherit; cursor: pointer; }
 .lede { max-width: 560px; font-size: 20px; line-height: 1.5; color: var(--muted); }
 
 /* ---------- Holding page ---------- */
-.holding { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; gap: 32px; padding-top: 64px; padding-bottom: 64px; }
-.holding .eyebrow { margin-bottom: 0; }
-.holding-title { font-size: clamp(48px, 9vw, 136px); line-height: 0.95; letter-spacing: -0.04em; font-weight: 600; }
+.hold { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; }
+.hold-top { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 28px; padding-bottom: 28px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; }
+.hold-name { font-family: var(--sans); font-size: 18px; font-weight: 600; text-transform: none; letter-spacing: -0.01em; }
+.hold-meta { color: var(--muted); }
+.hold-clock { color: var(--ink); margin-left: 8px; }
+.hold-main { flex: 1; display: flex; align-items: center; padding: 16px 0 56px; }
+.hold-frame { position: relative; width: 100%; padding-top: 72px; padding-bottom: 72px; }
+.hold-frame > :not(.corner) { padding-left: 40px; padding-right: 40px; }
+.corner { position: absolute; width: 28px; height: 28px; border-color: var(--ink); border-style: solid; border-width: 0; }
+.corner.tl { top: 0; left: 24px; border-top-width: 2px; border-left-width: 2px; }
+.corner.tr { top: 0; right: 24px; border-top-width: 2px; border-right-width: 2px; }
+.corner.bl { bottom: 0; left: 24px; border-bottom-width: 2px; border-left-width: 2px; }
+.corner.br { bottom: 0; right: 24px; border-bottom-width: 2px; border-right-width: 2px; }
+.hold-tc { position: absolute; top: 20px; right: 64px; display: flex; align-items: center; gap: 8px; font-size: 13px; letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
+.rec { width: 10px; height: 10px; border-radius: 999px; background: #E5321B; animation: recblink 1.2s steps(1) infinite; }
+@keyframes recblink { 50% { opacity: 0; } }
+.hold-eyebrow { margin-bottom: 24px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.hold-title { font-size: clamp(56px, 11.5vw, 184px); line-height: 0.9; letter-spacing: -0.045em; font-weight: 600; }
+.hold-foot { margin-top: 48px; display: flex; flex-wrap: wrap; gap: 24px 48px; align-items: flex-end; justify-content: space-between; }
+.hold-text { max-width: 460px; font-size: 20px; line-height: 1.5; color: var(--muted); }
+.ticker { background: var(--ink); color: var(--bg); overflow: hidden; border-top: 1px solid var(--ink); }
+.ticker-track { display: flex; width: max-content; animation: ticker 40s linear infinite; }
+.ticker-list { display: flex; margin: 0; padding: 0; list-style: none; }
+.ticker-list li { display: flex; align-items: center; gap: 32px; padding: 20px 0 20px 32px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
+.ticker-list li::after { content: ""; width: 6px; height: 6px; background: var(--accent); }
+@keyframes ticker { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; width: auto; }
+  .ticker-list { flex-wrap: wrap; }
+  .ticker-list[aria-hidden="true"] { display: none; }
+  .rec { animation: none; }
+}
+@media (max-width: 640px) {
+  .hold-frame { padding-top: 64px; padding-bottom: 56px; }
+  .hold-frame > :not(.corner) { padding-left: 20px; padding-right: 20px; }
+  .corner { width: 20px; height: 20px; }
+  .corner.tl, .corner.bl { left: 16px; }
+  .corner.tr, .corner.br { right: 16px; }
+  .hold-tc { right: 40px; top: 18px; font-size: 12px; }
+  .hold-meta { font-size: 11px; }
+}
 
 /* ---------- Stats ---------- */
 .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }

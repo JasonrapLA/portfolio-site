@@ -1,0 +1,59 @@
+{%- assign s = site.data.site -%}
+<div class="hold">
+  <header class="hold-top wrap mono">
+    <span class="hold-name">{{ s.name }}</span>
+    <span class="hold-meta">{{ s.location }} <span class="hold-clock" id="holdClock"></span></span>
+  </header>
+
+  <main class="hold-main">
+    <div class="hold-frame wrap">
+      <span class="corner tl" aria-hidden="true"></span><span class="corner tr" aria-hidden="true"></span>
+      <span class="corner bl" aria-hidden="true"></span><span class="corner br" aria-hidden="true"></span>
+
+      <div class="hold-tc mono" aria-hidden="true"><span class="rec"></span>REC <span id="holdTc">00:00:00:00</span></div>
+      <p class="hold-eyebrow mono">{{ s.role }}</p>
+      <h1 class="hold-title">{{ s.coming_soon_headline }}<br><span class="accent">{{ s.coming_soon_accent }}</span></h1>
+      <div class="hold-foot">
+        <p class="hold-text">{{ s.coming_soon_text }}</p>
+        <div class="btn-row">
+          {% if s.email and s.email != "" %}<a class="btn btn-solid" href="mailto:{{ s.email }}">{{ s.email }}</a>{% endif %}
+          {% if s.linkedin and s.linkedin != "" %}<a class="btn btn-outline" href="{{ s.linkedin }}">LinkedIn</a>{% endif %}
+        </div>
+      </div>
+    </div>
+  </main>
+
+  {% if s.coming_soon_ticker and s.coming_soon_ticker.size > 0 %}
+  <div class="ticker" role="marquee" aria-label="Highlights">
+    <div class="ticker-track">
+      {% for round in (1..2) %}
+      <ul class="ticker-list mono"{% if round == 2 %} aria-hidden="true"{% endif %}>
+        {% for t in s.coming_soon_ticker %}<li>{{ t }}</li>{% endfor %}
+      </ul>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+<script>
+(function () {
+  var clock = document.getElementById('holdClock');
+  var tc = document.getElementById('holdTc');
+  var fmt;
+  try { fmt = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles', hour: 'numeric', minute: '2-digit' }); } catch (e) {}
+  function tickClock() { if (clock && fmt) clock.textContent = fmt.format(new Date()); }
+  tickClock(); setInterval(tickClock, 15000);
+
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!tc || still) return;
+  var start = performance.now();
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function tickTc(now) {
+    var f = Math.floor((now - start) / (1000 / 24));
+    var ff = f % 24, s = Math.floor(f / 24), ss = s % 60, m = Math.floor(s / 60), mm = m % 60, hh = Math.floor(m / 60);
+    tc.textContent = pad(hh) + ':' + pad(mm) + ':' + pad(ss) + ':' + pad(ff);
+    requestAnimationFrame(tickTc);
+  }
+  requestAnimationFrame(tickTc);
+})();
+</script>

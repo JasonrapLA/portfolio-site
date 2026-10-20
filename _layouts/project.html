@@ -15,7 +15,7 @@ layout: default
 
 {% comment %} Turn a YouTube or Vimeo link into an embed URL {% endcomment %}
 {% assign embed = '' %}
-{% if p.video != blank %}
+{% if p.video and p.video != "" %}
   {% if p.video contains 'vimeo.com/' %}
     {% assign vid = p.video | split: '?' | first | split: '/' | last %}
     {% assign embed = 'https://player.vimeo.com/video/' | append: vid %}
@@ -34,9 +34,9 @@ layout: default
 </div>
 
 <section class="wrap case-hero">
-  <p class="eyebrow mono">{{ p.client }}{% if p.agency != blank %} · {{ p.agency }}{% endif %}{% if p.year != blank %} · {{ p.year }}{% endif %}</p>
+  <p class="eyebrow mono">{{ p.client }}{% if p.agency and p.agency != "" %} · {{ p.agency }}{% endif %}{% if p.year and p.year != "" %} · {{ p.year }}{% endif %}</p>
   <h1 class="case-title">{{ p.title }}</h1>
-  {% if p.summary != blank %}<p class="case-lede muted">{{ p.summary }}</p>{% endif %}
+  {% if p.summary and p.summary != "" %}<p class="case-lede muted">{{ p.summary }}</p>{% endif %}
 </section>
 
 <section class="wrap">
@@ -57,18 +57,18 @@ layout: default
 
 <section class="wrap section case-body">
   <div class="case-facts">
-    {% if p.role != blank %}<div class="fact"><span class="mono upper small muted">Role</span><span>{{ p.role }}</span></div>{% endif %}
-    {% if p.partner != blank %}<div class="fact"><span class="mono upper small muted">Partner</span><span>{{ p.partner }}</span></div>{% endif %}
-    {% if p.disciplines != blank %}<div class="fact"><span class="mono upper small muted">Disciplines</span><span>{{ p.disciplines }}</span></div>{% endif %}
+    {% if p.role and p.role != "" %}<div class="fact"><span class="mono upper small muted">Role</span><span>{{ p.role }}</span></div>{% endif %}
+    {% if p.partner and p.partner != "" %}<div class="fact"><span class="mono upper small muted">Partner</span><span>{{ p.partner }}</span></div>{% endif %}
+    {% if p.disciplines and p.disciplines != "" %}<div class="fact"><span class="mono upper small muted">Disciplines</span><span>{{ p.disciplines }}</span></div>{% endif %}
   </div>
   <div class="case-story">
-    {% if p.problem != blank %}<div class="story-block"><h2>The problem</h2><p class="muted">{{ p.problem }}</p></div>{% endif %}
-    {% if p.idea != blank %}<div class="story-block"><h2>The idea</h2><p class="muted">{{ p.idea }}</p></div>{% endif %}
-    {% if p.result != blank %}<div class="story-block"><h2>The result</h2><p class="muted">{{ p.result }}</p></div>{% endif %}
+    {% if p.problem and p.problem != "" %}<div class="story-block"><h2>The problem</h2><p class="muted">{{ p.problem }}</p></div>{% endif %}
+    {% if p.idea and p.idea != "" %}<div class="story-block"><h2>The idea</h2><p class="muted">{{ p.idea }}</p></div>{% endif %}
+    {% if p.result and p.result != "" %}<div class="story-block"><h2>The result</h2><p class="muted">{{ p.result }}</p></div>{% endif %}
     {% if content != '' %}<div class="story-block prose">{{ content }}</div>{% endif %}
     {% if p.press and p.press.size > 0 %}
     <div class="story-block"><h2>Press &amp; honors</h2>
-      <ul class="press">{% for pr in p.press %}<li>{% if pr.url != blank %}<a href="{{ pr.url }}" target="_blank" rel="noopener">{{ pr.name }}</a>{% else %}{{ pr.name }}{% endif %}</li>{% endfor %}</ul>
+      <ul class="press">{% for pr in p.press %}<li>{% if pr.url and pr.url != "" %}<a href="{{ pr.url }}" target="_blank" rel="noopener">{{ pr.name }}</a>{% else %}{{ pr.name }}{% endif %}</li>{% endfor %}</ul>
     </div>
     {% endif %}
   </div>

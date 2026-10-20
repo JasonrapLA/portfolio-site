@@ -74,7 +74,12 @@ content:
         type: boolean
         description: "On = the homepage shows a short holding page and the full site is only at /preview/. Turn off to go live."
       - { name: coming_soon_headline, label: Holding page headline, type: string }
+      - { name: coming_soon_accent, label: Holding page headline, second line (blue), type: string }
       - { name: coming_soon_text, label: Holding page text, type: text }
+      - name: coming_soon_ticker
+        label: Holding page ticker
+        type: string
+        list: true
       - { name: name, label: Name, type: string }
       - { name: role, label: Title, type: string }
       - { name: location, label: Location, type: string }
