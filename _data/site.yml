@@ -2,7 +2,7 @@
 # The full site stays viewable at /preview/ (hidden from search engines).
 coming_soon: true
 coming_soon_headline: "New portfolio"
-coming_soon_accent: "in the edit."
+coming_soon_accent: "in the works."
 coming_soon_text: "Cutting years of work down to the good stuff. Back shortly. In the meantime, say hi."
 coming_soon_ticker:
   - "2× Cannes Grand Prix"
