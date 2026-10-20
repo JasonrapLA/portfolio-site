@@ -17,6 +17,7 @@
         <div class="btn-row">
           {% if s.email and s.email != "" %}<a class="btn btn-solid" href="mailto:{{ s.email }}">{{ s.email }}</a>{% endif %}
           {% if s.linkedin and s.linkedin != "" %}<a class="btn btn-outline" href="{{ s.linkedin }}">LinkedIn</a>{% endif %}
+          {% if s.coming_soon_old_site and s.coming_soon_old_site != "" %}<a class="btn btn-outline" href="{{ s.coming_soon_old_site }}">See my current portfolio<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>{% endif %}
         </div>
       </div>
     </div>
