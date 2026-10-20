@@ -1,22 +1,38 @@
+{%- assign s = site.data.site -%}
+{%- if s.coming_soon -%}{%- assign home = '/preview/' -%}{%- else -%}{%- assign home = '/' -%}{%- endif -%}
+{%- assign holding = false -%}
+{%- if s.coming_soon and page.url == '/' -%}{%- assign holding = true -%}{%- endif -%}
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {% seo %}
+{% if s.coming_soon or page.noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body>
+{% if holding %}
+<main class="holding wrap">
+  <p class="eyebrow mono">{{ s.name }} — {{ s.role }} — {{ s.location }}</p>
+  <h1 class="holding-title">{{ s.coming_soon_headline }}</h1>
+  <p class="lede">{{ s.coming_soon_text }}</p>
+  <div class="btn-row">
+    {% if s.email != blank %}<a class="btn btn-solid" href="mailto:{{ s.email }}">{{ s.email }}</a>{% endif %}
+    {% if s.linkedin != blank %}<a class="btn btn-outline" href="{{ s.linkedin }}">LinkedIn</a>{% endif %}
+  </div>
+</main>
+{% else %}
 <header class="site-header wrap">
-  <a class="brand" href="{{ '/' | relative_url }}">{{ site.data.site.name }}</a>
+  <a class="brand" href="{{ home | relative_url }}">{{ s.name }}</a>
   <nav class="nav mono" aria-label="Primary">
-    <a href="{{ '/#work' | relative_url }}">Work</a>
-    <a href="{{ '/#about' | relative_url }}">About</a>
+    <a href="{{ home | append: '#work' | relative_url }}">Work</a>
+    <a href="{{ home | append: '#about' | relative_url }}">About</a>
     <a href="{{ '/awards/' | relative_url }}">Awards</a>
-    <a class="accent" href="{{ '/#contact' | relative_url }}">Contact</a>
+    <a class="accent" href="{{ home | append: '#contact' | relative_url }}">Contact</a>
   </nav>
 </header>
 <main>
@@ -25,5 +41,6 @@
 {% include contact.html %}
 {% include chat.html %}
 <script src="{{ '/assets/js/main.js' | relative_url }}" defer></script>
+{% endif %}
 </body>
 </html>

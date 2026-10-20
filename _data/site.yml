@@ -1,3 +1,9 @@
+# While true, the homepage shows a short "site updating" page.
+# The full site stays viewable at /preview/ (hidden from search engines).
+coming_soon: true
+coming_soon_headline: "New site in progress."
+coming_soon_text: "I’m putting the finishing touches on a new portfolio. Back shortly. In the meantime, say hi."
+
 name: "Jason Rappaport"
 role: "Group Creative Director / Writer"
 location: "Los Angeles"
